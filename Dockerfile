@@ -1,5 +1,5 @@
 FROM v2fly/v2fly-core:latest
-
+EXPOSE 80
 RUN apk add nginx
 RUN apk add gettext
 
