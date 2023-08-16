@@ -1,16 +1,10 @@
-FROM v2fly/v2fly-core:latest
+FROM nginx:latest
+LABEL ifeng fscarmen mack-a ygkkk
 EXPOSE 80
-RUN apk add nginx
-RUN apk add gettext
-
-COPY html /root/html/
-
-COPY config.json.tp /root/
-COPY nginx.template.conf /root/
-
-ADD startup.sh /startup.sh
-RUN chmod +x /startup.sh
-
-CMD /startup.sh
-
-
+USER root
+ENV uuid ea4909ef-7ca6-4b46-bf2e-6c07896ef338
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY config.json ./
+COPY entrypoint.sh ./
+RUN chmod a+x ./entrypoint.sh
+ENTRYPOINT [ "./entrypoint.sh" ]
